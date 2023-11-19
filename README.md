@@ -13,3 +13,10 @@ A naive implementation of a variable-sized array in C.
 
 ```bash
 make test
+```
+
+### Run Tests in Debugger
+
+```bash
+make test-debug
+```
