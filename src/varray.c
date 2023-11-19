@@ -9,7 +9,7 @@ varray_t *va_new(const size_t cap, const size_t el_size)
         return NULL;
     }
 
-    varray_t *va = (varray_t *)malloc(sizeof(varray_t));
+    varray_t *va = malloc(sizeof(*va));
     if (!va) {
         return NULL;
     }
@@ -30,7 +30,7 @@ varray_t *va_new(const size_t cap, const size_t el_size)
 void va_push(varray_t *va, const void *el)
 {
     if (va->len == va->cap) {
-        int res = va_grow(&va, va->cap * 2);
+        int res = va_grow(va, va->cap * 2);
         if (res < 0) {
             fprintf(stderr, "unable to grow array\n");
             return;
@@ -58,20 +58,16 @@ void *va_pop(varray_t *va)
     return (char *)va->data + offset;
 }
 
-int va_grow(varray_t **va, const size_t cap)
+int va_grow(varray_t *va, const size_t cap)
 {
     // TODO: use realloc?
-
-    varray_t *new_va = va_new(cap, (*va)->el_size);
-    if (!new_va) {
+    void *new_data = realloc(va->data, cap * va->el_size);
+    if (!new_data) {
         return -1;
     }
 
-    memcpy(new_va->data, (*va)->data, (*va)->el_size * (*va)->len);
-    new_va->len = (*va)->len;
-
-    va_free(va);
-    *va = new_va;
+    va->data = new_data;
+    va->cap = cap;
 
     return 0;
 }

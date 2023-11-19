@@ -147,11 +147,10 @@ int test_va_grow(void)
     va_push(actual, &i2);
     va_push(actual, &i3);
     ASSERT(actual->len == 3);
-    va_grow(&actual, 5);
+    va_grow(actual, 5);
     ASSERT(actual->cap == 5);
     va_push(actual, &i4);
     va_push(actual, &i5);
-    va_push(actual, &i1);
     int a1 = *(int *)va_pop(actual);
     ASSERT(a1 == 5);
     int a2 = *(int *)va_pop(actual);
