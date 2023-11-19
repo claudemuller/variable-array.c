@@ -1,4 +1,4 @@
-# vector.c
+# variable-array.c
 [![test](https://github.com/claudemuller/variable-array.c/actions/workflows/c.yml/badge.svg)](https://github.com/claudemuller/variable-array.c/actions/workflows/c.yml)
 
 A naive implementation of a variable-sized array in C.
