@@ -120,6 +120,26 @@ int test_va_pop(void)
     free(actual->data);
     free(actual);
 
+    int i4 = 4, i5 = 5;
+
+    actual = va_new(3, sizeof(int));
+    va_push(actual, &i1);
+    va_push(actual, &i2);
+    va_push(actual, &i3);
+    va_push(actual, &i4);
+    va_push(actual, &i5);
+    ASSERT(actual->cap == 6);
+    ASSERT(actual->len == 5);
+    actual_pop = *(int *)va_pop(actual);
+    actual_pop = *(int *)va_pop(actual);
+    actual_pop = *(int *)va_pop(actual);
+    actual_pop = *(int *)va_pop(actual);
+    ASSERT(actual->cap == 3);
+    ASSERT(actual->len == 1);
+    ASSERT(actual_pop == 2);
+    free(actual->data);
+    free(actual);
+
     return 0;
 }
 

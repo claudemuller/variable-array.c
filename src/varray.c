@@ -45,13 +45,18 @@ void va_push(varray_t *va, const void *el)
 void *va_pop(varray_t *va)
 {
     if (va->len == 0) {
-        // vator is empty
         return NULL;
     }
 
     va->len--;
 
-    // TODO: shrink array if less than half empty
+    // If number of elements less than half capacity, shrink array by half
+    if (va->len < va->cap / 2) {
+        int res = va_grow(va, va->cap / 2);
+        if (res < 0) {
+            fprintf(stderr, "unable to shrink array\n");
+        }
+    }
 
     size_t offset = va->len * va->el_size;
 
@@ -60,7 +65,6 @@ void *va_pop(varray_t *va)
 
 int va_grow(varray_t *va, const size_t cap)
 {
-    // TODO: use realloc?
     void *new_data = realloc(va->data, cap * va->el_size);
     if (!new_data) {
         return -1;
