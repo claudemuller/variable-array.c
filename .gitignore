@@ -1,0 +1,4 @@
+bin
+**/*.o
+tests/tests*
+.gdb_history
