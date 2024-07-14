@@ -8,6 +8,8 @@ A naive implementation of a variable-sized array in C.
 - [gcc](https://gcc.gnu.org/)
 - or [clang](https://clang.llvm.org/)
 - [make](https://www.gnu.org/software/make/)
+- (Optional) [gdb](https://sourceware.org/gdb/)
+- (Optional) [lldb](https://lldb.llvm.org/)
 
 ## Run Tests
 
